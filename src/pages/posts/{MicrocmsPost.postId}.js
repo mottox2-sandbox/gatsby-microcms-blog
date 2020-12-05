@@ -12,6 +12,14 @@ export const query = graphql`
     microcmsPost(id: { eq: $id }) {
       title
       postId
+      category {
+        id
+        name
+      }
+      tags {
+        id
+        name
+      }
     }
   }
 `

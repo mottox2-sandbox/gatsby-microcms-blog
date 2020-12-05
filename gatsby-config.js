@@ -25,6 +25,9 @@ module.exports = {
           {
             endpoint: "tag",
           },
+          {
+            endpoint: "category",
+          },
         ],
       },
     },
