@@ -21,6 +21,11 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           tagId
         }
       }
+      allMicrocmsCategory {
+        nodes {
+          categoryId
+        }
+      }
     }
   `)
 
@@ -29,13 +34,24 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   }
 
   console.log(result.data)
-  const tags = result.data.allMicrocmsTag.nodes
+  const { allMicrocmsTag, allMicrocmsCategory } = result.data
+  const tags = allMicrocmsTag.nodes
   tags.map(tag => {
     console.log(tag)
     createPage({
       path: `/tags/${tag.tagId}`,
       component: path.resolve("./src/templates/TagTemplate.tsx"),
       context: { tagId: tag.tagId },
+    })
+  })
+
+  const categories = allMicrocmsCategory.nodes
+  categories.map(category => {
+    console.log(category)
+    createPage({
+      path: `/categories/${category.categoryId}`,
+      component: path.resolve("./src/templates/CategoryTemplate.tsx"),
+      context: { categoryId: category.categoryId },
     })
   })
 }
