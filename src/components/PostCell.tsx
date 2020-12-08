@@ -3,11 +3,13 @@ import { Link } from "gatsby"
 
 export const PostCell = (props: any) => {
   const { title, content, publishedAt, postId } = props.post
+  const plainContent = content.replace(/(<([^>]+)>)/gi, "")
   return (
     <Link to={`/posts/${postId}`}>
       <div>
         {title}
-        <time style={{ marginLeft: 8 }}>{publishedAt}</time>
+        <p>{plainContent}</p>
+        <time>{publishedAt}</time>
       </div>
     </Link>
   )
