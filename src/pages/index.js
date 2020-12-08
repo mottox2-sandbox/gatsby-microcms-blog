@@ -11,8 +11,12 @@ const IndexPage = props => (
     <Link to="/page-2/">Go to page 2</Link> <br />
     <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
     <pre>{JSON.stringify(props.data, null, 2)}</pre>
-    {props.data.allMicrocmsPost.nodes.map(node => {
-      return <PostCell post={node} />
+    {props.data.allMicrocmsPost.nodes.map((node, i) => {
+      return (
+        <div style={{ marginTop: 24 }} key={i}>
+          <PostCell post={node} />
+        </div>
+      )
     })}
   </Layout>
 )
@@ -25,6 +29,12 @@ export const query = graphql`
         content
         postId
         publishedAt
+        category {
+          name
+        }
+        thumbnail {
+          url
+        }
         postPath: gatsbyPath(filePath: "/posts/{microcmsPost.postId}")
       }
     }
