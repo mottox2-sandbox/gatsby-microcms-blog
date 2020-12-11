@@ -1,8 +1,9 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
+    title: `My Gatsby Blog`,
     description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
     author: `@gatsbyjs`,
+    siteUrl: "https://example.com",
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -43,6 +44,39 @@ module.exports = {
         theme_color: `#663399`,
         display: `minimal-ui`,
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+      },
+    },
+    {
+      resolve: `gatsby-plugin-feed`,
+      options: {
+        feeds: [
+          {
+            query: `{
+              allMicrocmsPost(limit: 10, sort: {fields: publishedAt, order: DESC}) {
+                nodes {
+                  title
+                  content
+                  slug
+                  publishedAt
+                }
+              }
+            }`,
+            serialize: ({ query }) => {
+              const { allMicrocmsPost } = query
+              return allMicrocmsPost.nodes.map(post => {
+                console.log(post)
+                return {
+                  title: post.title,
+                  description: post.content,
+                  date: post.publishedAt,
+                  url: `https://example.com/posts/${post.slug}`,
+                }
+              })
+            },
+            output: "/rss.xml",
+            title: "Gatsby Blog",
+          },
+        ],
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
