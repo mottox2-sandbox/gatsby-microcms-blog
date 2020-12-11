@@ -8,16 +8,14 @@ import { PostCell } from "../components/PostCell"
 const IndexPage = props => (
   <Layout>
     <SEO title="Home" />
-    <Link to="/page-2/">Go to page 2</Link> <br />
-    <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
-    <pre>{JSON.stringify(props.data, null, 2)}</pre>
     {props.data.allMicrocmsPost.nodes.map((node, i) => {
       return (
-        <div style={{ marginTop: 24 }} key={i}>
+        <div style={{ marginBottom: 24 }} key={i}>
           <PostCell post={node} />
         </div>
       )
     })}
+    <pre>{JSON.stringify(props.data, null, 2)}</pre>
   </Layout>
 )
 
