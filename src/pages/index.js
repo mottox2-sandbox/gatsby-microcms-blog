@@ -26,6 +26,7 @@ export const query = graphql`
         title
         content
         postId
+        slug
         publishedAt
         category {
           name
@@ -33,7 +34,7 @@ export const query = graphql`
         thumbnail {
           url
         }
-        postPath: gatsbyPath(filePath: "/posts/{microcmsPost.postId}")
+        postPath: gatsbyPath(filePath: "/posts/{microcmsPost.slug}")
       }
     }
   }
