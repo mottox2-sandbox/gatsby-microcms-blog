@@ -24,6 +24,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       allMicrocmsCategory {
         nodes {
           categoryId
+          slug
         }
       }
     }
@@ -49,7 +50,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   categories.map(category => {
     console.log(category)
     createPage({
-      path: `/categories/${category.categoryId}`,
+      path: `/categories/${category.slug}`,
       component: path.resolve("./src/templates/CategoryTemplate.tsx"),
       context: { categoryId: category.categoryId },
     })

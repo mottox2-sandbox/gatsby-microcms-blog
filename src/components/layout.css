@@ -34,10 +34,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1;
 }
 
 .header .categories {
   display: flex;
+  z-index: 2;
 }
 
 .header .category {
