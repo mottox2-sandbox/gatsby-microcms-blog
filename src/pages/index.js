@@ -1,20 +1,14 @@
 import React from "react"
-import { Link, graphql } from "gatsby"
+import { graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import { PostCell } from "../components/PostCell"
+import PostList from "../components/PostList"
 
 const IndexPage = props => (
   <Layout>
     <SEO title="Home" />
-    {props.data.allMicrocmsPost.nodes.map((node, i) => {
-      return (
-        <div style={{ marginBottom: 24 }} key={i}>
-          <PostCell post={node} />
-        </div>
-      )
-    })}
+    <PostList posts={props.data.allMicrocmsPost.nodes} />
     <pre>{JSON.stringify(props.data, null, 2)}</pre>
   </Layout>
 )
